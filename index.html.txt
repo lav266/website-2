@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrollable Animation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .banner-container {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      white-space: nowrap;
+      padding: 20px;
+    }
+
+    .banner {
+      flex: 0 0 80%;
+      margin-right: 20px;
+      scroll-snap-align: start;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Website Header</h1>
+  </header>
+
+  <div class="banner-container">
+    <div class="banner">
+      <img src="6 (2).jpg" alt="Banner 1">
+    </div>
+    <div class="banner">
+      <img src="7 (1).jpg" alt="Banner 2">
+    </div>
+    <div class="banner">
+      <img src="8 (1).jpg" alt="Banner 3">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banners = document.querySelectorAll('.banner');
+
+      function handleScroll() {
+        banners.forEach((banner, index) => {
+          const position = banner.getBoundingClientRect().top;
+          const isVisible = position < window.innerHeight - 100;
+
+          if (isVisible) {
+            banner.style.opacity = 1;
+            banner.style.transform = 'translateY(0)';
+          }
+        });
+      }
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Trigger on page load
+    });
+  </script>
+
+</body>
+</html>
